@@ -1,33 +1,24 @@
-export function formatarMoeda(valor) {
-  const numero = typeof valor === 'string' ? parseFloat(valor.replace(',', '.')) : valor;
+// src/utils/formatUtils.js
 
-  if (isNaN(numero)) return 'R$ 0,00';
-
-  return numero.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+export function formatarData(data) {
+  if (!data) return '';
+  const date = new Date(data);
+  return date.toLocaleDateString('pt-BR');
 }
 
-export function formatarData(data, comHora = false) {
+export function formatarDataInput(data) {
+  if (!data) return '';
   const date = new Date(data);
-  if (isNaN(date)) return '';
+  const year = date.getFullYear();
+  const month = (`0${date.getMonth() + 1}`).slice(-2);
+  const day = (`0${date.getDate()}`).slice(-2);
+  return `${year}-${month}-${day}`;
+}
 
-  const options = comHora
-    ? {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      }
-    : {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      };
-
-  return date.toLocaleDateString('pt-BR', options);
+export function formatarMoeda(valor) {
+  if (!valor && valor !== 0) return '';
+  return Number(valor).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
 }

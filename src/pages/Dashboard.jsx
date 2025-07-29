@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
 import { useNavigate } from 'react-router-dom'
-import { BarChart2, FileText, ClipboardList, Briefcase, ArrowRight, User } from 'lucide-react'
+import {
+  BarChart2,
+  FileText,
+  ClipboardList,
+  Briefcase,
+  ArrowRight,
+  User,
+} from 'lucide-react'
 import {
   BarChart,
   Bar,
@@ -41,11 +48,11 @@ export default function Dashboard() {
     .reduce((acc, c) => acc + (parseFloat(c.valor_global) || 0), 0)
 
   const totalElevadores = contratos.reduce(
-    (acc, c) => acc + (parseInt(c.quantidade_elevador) || 0),
+    (acc, c) => acc + (parseInt(c.qtde_elevadores) || 0),
     0
   )
   const totalPlataformas = contratos.reduce(
-    (acc, c) => acc + (parseInt(c.quantidade_plataforma) || 0),
+    (acc, c) => acc + (parseInt(c.qtde_plataformas) || 0),
     0
   )
   const totalGlobal = contratos.reduce(
@@ -120,10 +127,10 @@ export default function Dashboard() {
 
 function Card({ title, value, icon, inteiro = false }) {
   return (
-    <div className="bg-gray-900 p-4 rounded shadow flex items-center gap-4">
+    <div className="bg-gray-900 p-5 rounded shadow flex items-center gap-4">
       <div className="text-blue-400">{icon}</div>
       <div>
-        <p className="text-sm text-gray-400">{title}</p>
+        <p className="text-sm text-white-500">{title}</p>
         <p className="text-2xl font-semibold text-blue-400">
           {typeof value === 'number'
             ? value.toLocaleString('pt-BR', {

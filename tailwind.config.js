@@ -1,28 +1,22 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
         azul: {
-          claro: '#60A5FA',     // Azul claro (para destaques e ícones)
-          escuro: '#1E3A8A',    // Azul escuro (para botões ou barras)
+          claro: "#38BDF8", // azul-celeste
+          escuro: "#0F172A", // azul-escuro
         },
-        fundo: '#0f172a',        // Cor de fundo principal (Dashboard)
         cinza: {
-          900: '#0f172a',
-          800: '#1e293b',
-          700: '#334155',
+          600: "#52525B",
+          700: "#3F3F46",
+          800: "#27272A",
+          900: "#18181B",
         },
-      },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'], // Fonte moderna para todo o app
-      },
-      boxShadow: {
-        card: '0 2px 10px rgba(0, 0, 0, 0.4)',
-      },
-      borderRadius: {
-        xl: '1rem',
       },
     },
   },

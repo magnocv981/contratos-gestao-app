@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../supabaseClient'
-import { formatarMoeda, formatarData } from '../../utils/formatUtils'
-import CardsResumoContratos from '../../components/CardResumo' // ✅ Importando os cards
+import CardsResumoContratos from '../../components/CardResumo' // se você tiver este componente
 
 export default function ListaContratos() {
   const [contratos, setContratos] = useState([])
@@ -29,6 +28,21 @@ export default function ListaContratos() {
     carregarContratos()
   }, [])
 
+  // Corrige fuso e formata como dd/mm/yyyy
+  function formatarData(data) {
+    if (!data) return ''
+    const [ano, mes, dia] = data.split('T')[0].split('-')
+    return `${dia}/${mes}/${ano}`
+  }
+
+  function formatarMoeda(valor) {
+    if (!valor) return 'R$ 0,00'
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    })
+  }
+
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
@@ -49,10 +63,12 @@ export default function ListaContratos() {
         </div>
       </div>
 
-      {/* ✅ Cards de resumo acima da tabela */}
+      {/* Cards de resumo (opcional) */}
       <CardsResumoContratos />
 
-      {carregando && <p className="text-gray-300">Carregando contratos...</p>}
+      {carregando && (
+        <p className="text-gray-300">Carregando contratos...</p>
+      )}
       {erro && <p className="text-red-500">{erro}</p>}
 
       {!carregando && contratos.length === 0 && (
@@ -77,13 +93,19 @@ export default function ListaContratos() {
               {contratos.map((c) => (
                 <tr
                   key={c.id}
-                  className="border-t border-gray-800 hover:bg-gray-800"
+                  className="border-t border-gray-800 hover:bg-blue-800 transition cursor-pointer"
                 >
                   <td className="px-6 py-3 whitespace-nowrap">{c.cliente}</td>
                   <td className="px-6 py-3 whitespace-nowrap">{c.estado}</td>
-                  <td className="px-6 py-3 whitespace-nowrap">{formatarMoeda(c.valor_global)}</td>
-                  <td className="px-6 py-3 whitespace-nowrap">{formatarData(c.inicio)}</td>
-                  <td className="px-6 py-3 whitespace-nowrap">{formatarData(c.encerramento)}</td>
+                  <td className="px-6 py-3 whitespace-nowrap">
+                    {formatarMoeda(c.valor_global)}
+                  </td>
+                  <td className="px-6 py-3 whitespace-nowrap">
+                    {formatarData(c.inicio)}
+                  </td>
+                  <td className="px-6 py-3 whitespace-nowrap">
+                    {formatarData(c.encerramento)}
+                  </td>
                   <td className="px-6 py-3 whitespace-nowrap">{c.status}</td>
                   <td className="px-6 py-3 whitespace-nowrap space-x-2">
                     <button

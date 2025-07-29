@@ -5,6 +5,7 @@ import FormContrato from '../pages/Contratos/FormularioContrato'
 import ListaContratos from '../pages/Contratos/ListaContratos'
 import Vendedor from '../pages/Vendedor/Vendedor'
 import VisualizarContrato from '../pages/Contratos/VisualizarContrato'
+import RelatorioEstado from './pages/Vendedor/RelatorioEstado'
 
 
 
@@ -18,6 +19,7 @@ export default function AppRouter() {
         <Route path="/vendedor" element={<Vendedor />} />
         <Route path="/contratos/visualizar/:id" element={<VisualizarContrato />} />
         <Route path="/contratos/editar/:id" element={<FormContrato />} />
+        <Route path="/relatorio-estado" element={<RelatorioEstado />} />
 
       </Routes>
     </MainLayout>
