@@ -1,11 +1,12 @@
 {
-  "name": "Contrakto - Gestão de Contratos",
+  "name": "Contrakto",
   "short_name": "Contrakto",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#1e40af",
-  "description": "Aplicativo para controle e análise de contratos públicos e privados.",
+  "orientation": "portrait",
+  "description": "App de gestão de contratos e licitações",
   "icons": [
     {
       "src": "/icon-192.png",
